@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var repository: Repository
+    private lateinit var repository: Repository
     private var scrollState: ScrollState = ScrollState.Init
     private var lastList: List<ViewModel> = emptyList()
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val lastPosition = list.adapter.itemCount
             list.smoothScrollToPosition(lastPosition)
         }
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         list.layoutManager = linearLayoutManager
-        list.isScrollContainer = true
         list.itemAnimator = object : DefaultItemAnimator() {
             override fun animateAdd(holder: RecyclerView.ViewHolder?): Boolean = false
         }
