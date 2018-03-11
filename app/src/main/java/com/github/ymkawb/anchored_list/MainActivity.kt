@@ -1,4 +1,4 @@
-package com.example.nivanov.myapplication
+package com.github.ymkawb.anchored_list
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -13,54 +13,14 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.function.BiFunction
+import kotlinx.android.synthetic.main.content_main.*
 
-enum class ScrollState {
-    Init {
-        override fun <T : RecyclerView.ViewHolder> nextState(nextScroll: Int, layoutManager: LinearLayoutManager, adapter: RecyclerView.Adapter<T>): ScrollState = when (nextScroll) {
-            RecyclerView.SCROLL_STATE_DRAGGING -> Dragging
-            else -> this
-        }
-        override fun shouldScroll(layoutManager: LinearLayoutManager): Boolean = true
-    },
-    Dragging {
-        override fun <T : RecyclerView.ViewHolder> nextState(nextScroll: Int, layoutManager: LinearLayoutManager, adapter: RecyclerView.Adapter<T>): ScrollState = when (nextScroll) {
-            RecyclerView.SCROLL_STATE_SETTLING -> DraggingSettling
-            RecyclerView.SCROLL_STATE_IDLE ->
-                if (layoutManager.findLastVisibleItemPosition() == adapter.itemCount - 1) Init else ScrollLocked
-            else -> this
-        }
-
-        override fun shouldScroll(layoutManager: LinearLayoutManager): Boolean = false
-    },
-    ScrollLocked {
-        override fun <T : RecyclerView.ViewHolder> nextState(nextScroll: Int, layoutManager: LinearLayoutManager, adapter: RecyclerView.Adapter<T>): ScrollState = when (nextScroll) {
-            RecyclerView.SCROLL_STATE_DRAGGING -> Dragging
-            else -> this
-        }
-
-        override fun shouldScroll(layoutManager: LinearLayoutManager): Boolean = false
-    },
-    DraggingSettling {
-        override fun shouldScroll(layoutManager: LinearLayoutManager): Boolean = false
-        override fun <T : RecyclerView.ViewHolder> nextState(nextScroll: Int, layoutManager: LinearLayoutManager, adapter: RecyclerView.Adapter<T>): ScrollState = when (nextScroll) {
-            RecyclerView.SCROLL_STATE_IDLE ->
-                if (layoutManager.findLastVisibleItemPosition() == adapter.itemCount - 1) Init else ScrollLocked
-            RecyclerView.SCROLL_STATE_DRAGGING -> Dragging
-            else -> this
-        }
-    };
-
-
-    abstract fun <T : RecyclerView.ViewHolder> nextState(nextScroll: Int, layoutManager: LinearLayoutManager, adapter: RecyclerView.Adapter<T>): ScrollState
-    abstract fun shouldScroll(layoutManager: LinearLayoutManager): Boolean;
-
-};
+;
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var list: RecyclerView
+//    lateinit var list: RecyclerView
     lateinit var repository: Repository
     var scrollState: ScrollState = ScrollState.Init
     var lastList: List<ViewModel> = emptyList()
@@ -81,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             val lastPosition = list.adapter.itemCount
             list.smoothScrollToPosition(lastPosition)
         }
-        list = findViewById(R.id.list)
         val scroller = object : LinearSmoothScroller(this) {
             override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
                 return MILLISECONDS_PER_INCH / displayMetrics!!.densityDpi;

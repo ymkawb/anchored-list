@@ -1,4 +1,4 @@
-package com.example.nivanov.myapplication
+package com.github.ymkawb.anchored_list
 
 import android.util.Log
 import io.reactivex.Observable
@@ -15,12 +15,15 @@ class Repository {
     val viewModel: Observable<List<ViewModel>> =
             Observable.generate { t ->
                 val sleep = sizeIncreaseGen.nextInt(10) * 100L
-                Log.i("Repository","Sleeping at ${Thread.currentThread().name} for $sleep ms")
                 TimeUnit.MILLISECONDS.sleep((sleep))
                 val size = sizeIncreaseGen.nextInt(5)
-                Log.i("Repository", "increasing size by $size")
                 for (i in 0..size) {
-                    lastModel.add(ViewModel("title at ${id}", "Body at ${id}", id++))
+                    val nextId = id++
+                    lastModel.add(ViewModel(title = "title at ${id}",
+                            body = "Body at ${id}",
+                            id = nextId,
+                            imageUri = "https://placeimg.com/640/480/people/$nextId"
+                            ))
                 }
                 if(lastModel.size < 200)
                     t?.onNext(lastModel.toList())
