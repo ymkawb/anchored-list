@@ -9,6 +9,7 @@ enum class ScrollState {
             RecyclerView.SCROLL_STATE_DRAGGING -> Dragging
             else -> this
         }
+
         override fun shouldScroll(layoutManager: LinearLayoutManager): Boolean = true
     },
     Dragging {

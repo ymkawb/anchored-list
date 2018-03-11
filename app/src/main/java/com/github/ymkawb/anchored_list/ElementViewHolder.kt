@@ -10,13 +10,13 @@ import com.facebook.drawee.view.SimpleDraweeView
  * Created by nivanov on 10.03.2018.
  */
 
-class ElementViewHolder(root : View) : RecyclerView.ViewHolder(root) {
+class ElementViewHolder(root: View) : RecyclerView.ViewHolder(root) {
 
-    val title : TextView = root.findViewById(R.id.title)
-    var body : TextView = root.findViewById(R.id.body)
-    val avatar : SimpleDraweeView = root.findViewById(R.id.avatar)
+    val title: TextView = root.findViewById(R.id.title)
+    var body: TextView = root.findViewById(R.id.body)
+    val avatar: SimpleDraweeView = root.findViewById(R.id.avatar)
 
-    var currentViewModel : ViewModel? = null
+    var currentViewModel: ViewModel? = null
 
     init {
         root.setOnClickListener {
@@ -26,7 +26,7 @@ class ElementViewHolder(root : View) : RecyclerView.ViewHolder(root) {
         }
     }
 
-    fun bind(viewModel : ViewModel) {
+    fun bind(viewModel: ViewModel) {
         title.text = viewModel.title
         body.text = viewModel.body
         currentViewModel = viewModel

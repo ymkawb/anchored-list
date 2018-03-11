@@ -15,22 +15,19 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-;
-
-
 class MainActivity : AppCompatActivity() {
 
-//    lateinit var list: RecyclerView
     lateinit var repository: Repository
-    var scrollState: ScrollState = ScrollState.Init
-    var lastList: List<ViewModel> = emptyList()
+    private var scrollState: ScrollState = ScrollState.Init
+    private var lastList: List<ViewModel> = emptyList()
 
     fun log(msg: () -> String) {
         Log.i("MainActivity", msg())
     }
 
-
-    private val MILLISECONDS_PER_INCH = 250f
+    companion object {
+        const val MILLISECONDS_PER_INCH = 250f
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

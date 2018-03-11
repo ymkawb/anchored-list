@@ -25,6 +25,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
-        tools:listItem="@layout/item"
-        />
+        tools:listItem="@layout/item" />
 </android.support.constraint.ConstraintLayout>

@@ -8,15 +8,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
 
-class ElementsAdapter(private val inflater : LayoutInflater,
-                      private val viewModelObserver : Observable<ViewModelUpdate>) : RecyclerView.Adapter<ElementViewHolder>() {
+class ElementsAdapter(private val inflater: LayoutInflater,
+                      private val viewModelObserver: Observable<ViewModelUpdate>) : RecyclerView.Adapter<ElementViewHolder>() {
 
     init {
         setHasStableIds(true)
     }
 
-    private var currentData : List<ViewModel> = emptyList()
-    private var subscription : Disposable? = null
+    private var currentData: List<ViewModel> = emptyList()
+    private var subscription: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ElementViewHolder =
             ElementViewHolder(inflater.inflate(R.layout.item, parent, false))

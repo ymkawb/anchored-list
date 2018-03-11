@@ -1,6 +1,5 @@
 package com.github.ymkawb.anchored_list
 
-import android.util.Log
 import io.reactivex.Observable
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -23,9 +22,9 @@ class Repository {
                             body = "Body at ${id}",
                             id = nextId,
                             imageUri = "https://placeimg.com/640/480/people/$nextId"
-                            ))
+                    ))
                 }
-                if(lastModel.size < 200)
+                if (lastModel.size < 200)
                     t?.onNext(lastModel.toList())
                 else
                     t?.onComplete()
