@@ -22,7 +22,7 @@ class Repository {
                 for (i in 0..size) {
                     lastModel.add(ViewModel("title at ${id}", "Body at ${id}", id++))
                 }
-                if(lastModel.size < 150)
+                if(lastModel.size < 200)
                     t?.onNext(lastModel.toList())
                 else
                     t?.onComplete()
