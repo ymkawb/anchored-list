@@ -1,9 +1,7 @@
 package com.example.nivanov.myapplication
 
 import android.util.Log
-import io.reactivex.Emitter
 import io.reactivex.Observable
-import io.reactivex.functions.Consumer
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -16,9 +14,10 @@ class Repository {
     private var sizeIncreaseGen: Random = Random()
     val viewModel: Observable<List<ViewModel>> =
             Observable.generate { t ->
-                Log.i("Repository","Sleeping at ${Thread.currentThread().name}")
-                TimeUnit.MILLISECONDS.sleep(600)
-                val size = 2//sizeIncreaseGen.nextInt(5)
+                val sleep = sizeIncreaseGen.nextInt(10) * 100L
+                Log.i("Repository","Sleeping at ${Thread.currentThread().name} for $sleep ms")
+                TimeUnit.MILLISECONDS.sleep((sleep))
+                val size = sizeIncreaseGen.nextInt(5)
                 Log.i("Repository", "increasing size by $size")
                 for (i in 0..size) {
                     lastModel.add(ViewModel("title at ${id}", "Body at ${id}", id++))
